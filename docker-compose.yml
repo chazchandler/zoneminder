@@ -1,0 +1,18 @@
+version: '2.1'
+
+services:
+  zoneminder:
+    container_name: zoneminder
+    build: 
+      context: .
+    image: armhf/zoneminder:1.31.1
+    environment:
+      PHP_TIMEZONE: 'America/New_York'
+    ports:
+      - "8080:80"
+    volumes:
+      - /srv/zoneminder/cache/events:/var/lib/zoneminder/events
+      - /srv/zoneminder/cache/images:/var/lib/zoneminder/images
+      - /srv/zoneminder/database:/var/lib/mysql
+      - /srv/zoneminder/logs:/var/log/zm
+      - /dev/video0:/dev/video0
